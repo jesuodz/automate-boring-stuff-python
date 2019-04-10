@@ -1,0 +1,1 @@
+@pyw.exe C:\Users\jesuodz\code\python-sandbox\automate-boring-stuff-python\mcb.pyw %*
