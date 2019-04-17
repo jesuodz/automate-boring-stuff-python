@@ -12,21 +12,23 @@ import sys
 
 mcb_shelf = shelve.open('mcb')
 
+opc = sys.argv[1].lower()
+
 # Save clipboard content.
 if len(sys.argv) == 3:
-    if sys.argv[1].lower() == 'save':
+    if opc == 'save':
         mcb_shelf[sys.argv[2]] = pyperclip.paste()
     # Delete a keyword
-    elif sys.argv[1].lower() == 'delete':
+    elif opc == 'delete':
         del mcb_shelf[sys.argv[2]]
 elif len(sys.argv) == 2:
     # List keywords and load content.
-    if sys.argv[1].lower() == 'list':
+    if opc == 'list':
         pyperclip.copy(str(list(mcb_shelf.keys())))
     # Delete all keywords
     elif sys.argv[1] in mcb_shelf:
         pyperclip.copy(mcb_shelf[sys.argv[1]])
-    elif sys.argv[1].lower() == 'delete':
+    elif opc == 'delete':
         mcb_shelf.clear()
 
 mcb_shelf.close()
