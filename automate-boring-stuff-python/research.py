@@ -8,7 +8,7 @@ files = [file for file in os.listdir() if file.endswith('txt')]
 pattern = input('Regex pattern: ')
 regex = re.compile(r'%s' % pattern)
 
-# TODO: Loop through all files in a efficient manner
+# TODO: Loop through all files in a efficient mannerk
 
 # TODO: Find and save matches
 
