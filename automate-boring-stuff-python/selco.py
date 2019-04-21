@@ -1,7 +1,6 @@
 #! python3
 # selcopy.py - Copy files with a certain extension
 
-# TODO: Copy the matched file in the right directory.
 import shutil
 import re
 import os
