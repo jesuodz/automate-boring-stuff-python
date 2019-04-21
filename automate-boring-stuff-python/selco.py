@@ -5,6 +5,7 @@
 import shutil
 import re
 import os
+from os.path import join
 
 # Create a regex that matches these file extensions.
 extens = input('Extensions (separated by commas): ').split(',')
@@ -18,16 +19,24 @@ if not os.path.isdir('selections'):
 else:
     print('\n"selections" directory already exits. Copying files into existing folder.\n')
 
-for folder, subfolder, filename in os.walk( os.getcwd() ):
-    print(filename)
-    # file = regexPattern.search(filename)
+fls_copies = 0
+for root, dirs, filenames in os.walk( os.getcwd() ):   
 
-    # if file == None:
-    #     continue
-    
-    # print('Copying "%s" into "selections"' % file.group() )
-    # shutil.copy(file.group(), 'selections')
+    for filename in filenames:
+        file = regexPattern.search(filename)
 
-# TODO: Copy each directory inside the current working directory
+        if file == None:
+            continue
 
-# TODO: Copy the matched file in the right directory.
+        src = join(root, file.group())
+
+        print('Copying "%s" into "selections"' % file.group() )
+        shutil.copy(src, 'selections')
+        fls_copies += 1
+
+    # Don't visit "selections" subfolder
+    if 'selections' in dirs:
+        dirs.remove('selections') 
+
+print("\n%s files copied." % fls_copies )
+input('Press "ENTER" to quit.')
