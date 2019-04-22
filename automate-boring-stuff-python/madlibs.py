@@ -7,22 +7,21 @@ regex = re.compile(r'\w+|\W?')
 
 words = regex.findall(madlibs)
 
-for WORD in words:
+def new_word(w):
+    word = input('Enter a new word ( %s ): ' % (w.lower()))
+    return word
 
+for WORD in words:
     if WORD == 'ADJECTIVE':
-        ask = input('Enter an adjective:\n')
-        words[words.index(WORD)] = ask
+        words[words.index(WORD)] = new_word(WORD)
     if WORD == 'VERB':
-        ask = input('Enter an verb:\n')
-        words[words.index(WORD)] = ask
+        words[words.index(WORD)] = new_word(WORD)
     if WORD == 'NOUN':
-        ask = input('Enter an noun:\n')
-        words[words.index(WORD)] = ask
+        words[words.index(WORD)] = new_word(WORD)
 
 text = ''.join(words)
 
-print()
-print("New text:")
+print("\nNew text:")
 print(text)
 
 new_madlib = open('madlib1-new.txt', 'w')
