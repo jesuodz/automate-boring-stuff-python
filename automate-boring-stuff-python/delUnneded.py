@@ -4,10 +4,10 @@
 import os
 from os.path import join, getsize
 
-max_size = 100000000
+max_size = 100000000 # 100mb
 
 folders = []
-file_paths = []
+lst_files = []
 
 for root, dirs, files in os.walk( os.getcwd() ):
 
@@ -20,9 +20,22 @@ for root, dirs, files in os.walk( os.getcwd() ):
         file_path = join(root, filename)
 
         if getsize(file_path) > max_size:
-            file_paths.append(file_path)
+            lst_files.append(file_path)
 
-print("Folders to delete: %s" % len(folders))
-print("Files to delete: %s" % len(file_paths))
+if len(folders) != 0:
+    print('%s folders to delete.' % len(folders))
+    for folder in folders:
+        print(folder)
+else:
+    print('0 folders to delete.')
+
+print()
+
+if len(lst_files) != 0:
+    print('%s files to delete.' % len(lst_files))
+    for file in lst_files:
+        print(file)
+else:
+    print('0 files to delete.')
 
 input()
