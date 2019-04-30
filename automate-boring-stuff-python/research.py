@@ -14,7 +14,6 @@ if len(pattern) == 0: exit('Pattern not long enough.')
 
 regex = re.compile(r'%s' % pattern)
 
-# TODO: Loop through all files in a efficient mannerk
 for file in files:
     fhandler = open(file, 'r', encoding='utf-8')
     content = fhandler.read()
