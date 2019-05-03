@@ -14,15 +14,17 @@ if len(pattern) == 0: exit('Pattern not long enough.')
 
 regex = re.compile(r'%s' % pattern)
 
-for file in files:
-    fhandler = open(file, 'r', encoding='utf-8')
-    content = fhandler.read()
+def search(file):
+    """ Find occurrences in current file """
+    occurr = list()
 
-    print(regex.findall(content))
-    fhandler.close()
+    for (offset, line) in enumerate(open(file, encoding='utf-8')):
+        if regex.search(line): occurr.append(offset)
+    return (occurr, file)
 
-# TODO: Find and save matches
-
-""" IDEA: Save matches by file and line in a dict
-         { 'FILE' : ['LINE1', 'LINE2', 'LINE4'], ...}
-"""
+for item in map(search, files):
+    if len(item[0]) == 0: continue
+    print("Found %i occurrences from line(s) %s in file %s" %
+         (len(item[0]), (item[0]), item[1]))
+else:
+    print("Found 0 occurrences in '.txt' files in current directory.")
