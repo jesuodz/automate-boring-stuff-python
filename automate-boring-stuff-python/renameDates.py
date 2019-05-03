@@ -34,3 +34,5 @@ for amer_filename in os.listdir('.'):
 
     print('Renaming "%s" to "%s"' % (amer_filename, euro_filename))
     shutil.move(amer_filename, euro_filename)
+else:
+    print('0 files to rename.')
