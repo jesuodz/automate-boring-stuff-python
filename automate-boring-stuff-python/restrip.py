@@ -7,16 +7,14 @@
 import re
 import sys
 
-words_regex = re.compile(r'(\w+)')
+spce_regex = re.compile(r'\s+')
 
-def strip(string, char=None):
-    if char != None:
-        words_regex = re.compile(r'%s' % char)
+def strip(s, char):
+    # Delete whitespace characters from beginning and end
+    return spce_regex.sub('', string)
 
-    return words_regex.sub('',string)
+if len(sys.argv) >= 1:
+    string = sys.argv[1]
+    char = None if len(sys.argv) == 2 else sys.argv[2]
 
-# Delete only a matched string in string
-if len(sys.argv) == 3:
-    print(repr(strip(sys.argv[1], sys.argv[2])))
-
-# Delete whitespace characters from beginning and end
+    print(repr(strip(sys.argv[1], char)))
