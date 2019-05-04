@@ -7,11 +7,11 @@
 import re
 import sys
 
-spce_regex = re.compile(r'\s+')
+word_re = re.compile(r'\S+((\s+\S+)?)+')
 
-def strip(s, char):
+def strip(s, c):
     # Delete whitespace characters from beginning and end
-    return spce_regex.sub('', string)
+    if not c: return word_re.search(s).group()
 
 if len(sys.argv) >= 1:
     string = sys.argv[1]
