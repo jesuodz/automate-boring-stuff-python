@@ -13,6 +13,10 @@ def strip(s, c):
     # Delete whitespace characters from beginning and end
     if not c: return word_re.search(s).group()
 
+    # Delete character from beginning and end
+    char_re = re.compile(r'(^%s)|(%s$)' % (c, c))
+    return char_re.sub('', s)
+
 if len(sys.argv) >= 1:
     string = sys.argv[1]
     char = None if len(sys.argv) == 2 else sys.argv[2]
