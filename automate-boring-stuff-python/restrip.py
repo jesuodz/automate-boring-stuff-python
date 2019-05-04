@@ -1,8 +1,7 @@
 #! python3
 # restrip.py - regex version of strip() method.
-
-# TOFIX:
-# Fails with 'o' and ' hello' with string 'hello world hello'
+# Usage:       python restrip.py "   textt ..  " - Strip trailing whitespaces.
+#              python restrip.py "hello world" "hello "  - Strip later text.
 
 import re
 import sys
