@@ -16,7 +16,8 @@ regexPattern = re.compile(r'(^.*?)(%s)$' % extens_pattern)
 if not os.path.isdir('selections'):
     os.mkdir('selections')
 else:
-    print('\n"selections" directory already exits. Copying files into existing folder.\n')
+    print('\n"selections" directory already exits.')
+    print('Copying files into existing folder.\n')
 
 fls_copies = 0
 for root, dirs, filenames in os.walk( os.getcwd() ):   
