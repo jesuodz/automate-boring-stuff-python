@@ -3,21 +3,21 @@
 # Usage:       python restrip.py "   textt ..  " - Strip trailing whitespaces.
 #              python restrip.py "hello world" "hello "  - Strip later text.
 
-"""
-BUG:
-    -   python restrip.py '  '
-"""
-
 import re
 import sys
 
 word_re = re.compile(r'\S+((\s+\S+)?)+')
 
 def strip(s, c):
-    # Delete whitespace characters from beginning and end
-    if not c: return repr(word_re.search(s).group())
+    # Delete whitespace characters from beginning and end.
+    if not c: 
+        for char in s:
+            if not char.isspace():
+                return repr(word_re.search(s).group())
+        else:
+            return repr(s)
 
-    # Delete character from beginning and end
+    # Delete character from beginning and end.
     char_re = re.compile(r'(^%s)|(%s$)' % (c, c))
     return repr(char_re.sub('', s))
 
