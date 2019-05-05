@@ -25,7 +25,8 @@ for amer_filename in os.listdir('.'):
     year_part = mo.group(6)
     after_part = mo.group(8)
 
-    euro_filename = before_part + day_part + '-' + month_part + '-' + year_part + after_part
+    euro_filename = (before_part + day_part + '-' + month_part + '-' +
+                     year_part + after_part)
 
     abs_working_dir = os.path.abspath('.')
     amer_filename = os.path.join(abs_working_dir, amer_filename)
@@ -33,3 +34,5 @@ for amer_filename in os.listdir('.'):
 
     print('Renaming "%s" to "%s"' % (amer_filename, euro_filename))
     shutil.move(amer_filename, euro_filename)
+else:
+    print('0 files to rename.')
