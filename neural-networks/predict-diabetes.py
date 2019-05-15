@@ -4,7 +4,7 @@ def sigmoid(x):
     return 1.0 / (1 + np.exp(-x))
 
 def sigmoid_der(x):
-    return 1 * (1.0 - x)
+    return sigmoid(x) * (1.0 - sigmoid(x))
 
 class NeuralNetwork:
     def __init__(self, input, predicted, bias, learning_rate):
@@ -27,23 +27,19 @@ class NeuralNetwork:
     def backprop(self):
         # Paso 1:
         # Encuentra el error
-        self.error = self.output - self.predicted
+        error = self.output - self.predicted
 
         # Paso 2:
-        # 
-        self.dcost_dpred = self.error
-        self.dpred_doutput = sigmoid_der( sigmoid(self.output) )
+        # Aplica el algoritmo de gradiente descendiente y actualiza los pesos
+        output_delta = error * sigmoid_der( self.output )
+        d_weights = self.lr * np.dot(self.input.T, output_delta)
 
-        self.output_delta = self.dcost_dpred * self.dpred_doutput
+        self.weights -= d_weights
 
-        inv_input = self.input.T
-        self.weights -= self.lr * np.dot(inv_input, self.output_delta)
-
-        for n in self.output_delta:
+        for n in output_delta:
             self.b -= self.lr * n
 
     def result(self, data):
-
         self.data = np.array(data)
 
         return sigmoid( np.dot(self.data, self.weights) + self.b )
@@ -69,6 +65,6 @@ if __name__ == "__main__":
         nn.feedforward()
         nn.backprop()
 
-    print(nn.result([1,1,0,1]))
-    print(nn.result([0,1,0,1]))
+    print(nn.result([1,0,1]))
+    print(nn.result([0,0,1]))
     
