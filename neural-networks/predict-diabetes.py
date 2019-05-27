@@ -65,6 +65,5 @@ if __name__ == "__main__":
         nn.feedforward()
         nn.backprop()
 
-    print(nn.result([1,0,1]))
-    print(nn.result([0,0,1]))
+    print(nn.output)
     
