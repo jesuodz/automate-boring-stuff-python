@@ -1,19 +1,28 @@
 #! python3
 import numpy as np
-import json
 
 np.random.seed(50)
 
-points = np.random.randn(700, 2) + np.array([0, -3])
+file = open('points.json', 'w')
 
-data = {}
+cat = np.random.randn(700, 2) + np.array([0, -3])
+mouse = np.random.randn(700, 2) + np.array([3, 3])
+dog = np.random.randn(700, 2) + np.array([-3, 3])
 
-for p, cord in enumerate(points):
-    position = { "x": cord[0], "y": cord[1] }
-    data.setdefault("p" + str(p), position)
+feature_set = np.vstack([cat, mouse, dog])
 
-with open("points.json", "w") as data_file:
-    json.dump(data, data_file, indent=2)
+# Create points
+file.write('data = [\n')
+lastChars = ',\n'
 
-print("%s data points created" % (p+1))
+for c, cords in enumerate(feature_set):
+    point = {"x": cords[0], "y": cords[1]}
+
+    if c == len(feature_set) - 1:
+        lastChars = '\n];'
+
+    file.write('  ' + str(point) + lastChars)
+file.close()
+
+print("%s data points created" % len(feature_set))
 print("Open index.html to see visualization")
