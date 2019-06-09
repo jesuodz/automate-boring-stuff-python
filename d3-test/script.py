@@ -5,18 +5,25 @@ np.random.seed(50)
 
 file = open('points.json', 'w')
 
-cat = np.random.randn(700, 2) + np.array([0, -3])
-mouse = np.random.randn(700, 2) + np.array([3, 3])
-dog = np.random.randn(700, 2) + np.array([-3, 3])
+cat = np.random.randn(700, 2) + np.array([2, -5])
+mouse = np.random.randn(700, 2) + np.array([4, 3])
+dog = np.random.randn(700, 2) + np.array([-4, -7])
+human = np.random.randn(700, 2) + np.array([-5,8])
+bird = np.random.randn(700, 2) + np.array([4, 5])
 
-feature_set = np.vstack([cat, mouse, dog])
+feature_set = np.vstack([cat, mouse, dog, human, bird])
 
-# Create points
+# Create dots file
 file.write('data = [\n')
 lastChars = ',\n'
 
-for c, cords in enumerate(feature_set):
-    point = {"x": cords[0], "y": cords[1]}
+colors = ["green", "blue", "red", "yellow", "cyan"]
+
+for c, coords in enumerate(feature_set):
+    if c % 700 == 0:
+        color = colors.pop()
+
+    point = {"x": coords[0], "y": coords[1], "color": color}
 
     if c == len(feature_set) - 1:
         lastChars = '\n];'
